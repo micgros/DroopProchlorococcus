@@ -15,6 +15,9 @@ md = 100;
 % Redfield ratio
 R_CN = 6.625;
 
+% Time step index (ts)
+ts = 1/60;
+
 % gama=fraction of heterotroph mort/resp to inorganic form
 gamma_n = 0.5; 
 gamma_c = 0.5; 
@@ -24,11 +27,11 @@ vol = (4/3) * pi * radius^3;
 
 % Nitrogen uptake (umol N cell-1 day-1)/86400 for per sec
 % (9.1e-9)*vola^0.67 (umol N cell-1 day-1)
-V_n_max = ((9.1e-9) / 86400) * vol^0.67; 
+V_n_max = ((9.1e-9) / (ts*86400)) * vol^0.67; 
 V_c_max = V_n_max; 
 
 % growth rates. sec-1
-mu_inf = 1e-5; 
+mu_inf = 1e-5/ts; 
 
 % k - half saturation
 k_n = 0.17 * vol^0.27; 
@@ -43,7 +46,7 @@ q_n_max=5 * q_n_min;
 q_c_max=3 * q_c_min; 
 
 % mortality - s-1
-m = 7.1429e-07; 
+m = 7.1429e-07/ts; 
 
 % biomass (umol N l-1 )
 b_n = 0.5148; % start at 0.5148 cells per L
@@ -63,9 +66,9 @@ ON = 20;
 OC = ON*R_CN; 
 
 % CO2 parameters
-r0 = 0.18/86400; % dark respiration, sec-1 = 0.18 d-1, Geider & Osborne 1989 
+r0 = 0.18/(ts*86400); % dark respiration, sec-1 = 0.18 d-1, Geider & Osborne 1989 
 b = 0.01; % respiration coefficient, no units, Geider & Osborne 1989
-Kg = 0.4968/86400; % m sec-1 = 0.7 cm h-1 from Cole & Caraco 1998
+Kg = 0.4968/(ts*86400); % m sec-1 = 0.7 cm h-1 from Cole & Caraco 1998
 B = 10; % Revelle buffer factor, Mick's book
 
 rhoref = 1024.5 ;% reference density of seawater
@@ -80,16 +83,16 @@ time = linspace(0, md, 1000);
 
 %output vectors
 % Ba_n_v is the vector used for keeping all of the ba_n values
-B_n_v = zeros(86400*md, 1); %preallocate
-B_c_v = zeros(86400*md, 1); 
-X_v = zeros(86400*md, 1); 
-N_v = zeros(86400*md, 1); 
-C_v = zeros(86400*md, 1); 
-ON_v = zeros(86400*md, 1); 
-OC_v = zeros(86400*md, 1);
-mu_v = zeros(86400*md, 1);
-q_n_v = zeros(86400*md, 1);
-q_c_v = zeros(86400*md, 1);
+B_n_v = zeros(ts*86400*md, 1); %preallocate
+B_c_v = zeros(ts*86400*md, 1); 
+X_v = zeros(ts*86400*md, 1); 
+N_v = zeros(ts*86400*md, 1); 
+C_v = zeros(ts*86400*md, 1); 
+ON_v = zeros(ts*86400*md, 1); 
+OC_v = zeros(ts*86400*md, 1);
+mu_v = zeros(ts*86400*md, 1);
+q_n_v = zeros(ts*86400*md, 1);
+q_c_v = zeros(ts*86400*md, 1);
 
 % vectors for graphs
 B_n_vv = zeros(1, 1000); 
@@ -104,9 +107,9 @@ q_n_vv = zeros(1, 1000);
 q_c_vv = zeros(1, 1000);
 
 % The LOOP 
-for i=1:86400*md
+for i=1:ts*86400*md
     
-    h=(.09/-27/86400)*i+.105; % the hight of the water columns in meters
+    h=(.09/-27/(ts*86400))*i+.105; % the hight of the water columns in meters
     
     % alkalinity and Csat calculation
     ta = 112.46 * i + 2617.6;
@@ -115,7 +118,7 @@ for i=1:86400*md
     Csat = csatd * 1e6 / rhoref;
 
     % HCO3- additions (1 mM) on days: 0, 5, 11, 18
-    if i==432000&&950400&&1555200
+    if i == ts*432000 && ts*950400 && ts*1555200
         C=C+1000;
     end
     
@@ -168,16 +171,16 @@ end
 
 % vectors for graphs loop
 for k=1:1000
-B_n_vv(k)=B_n_v(round(86.4*md*k)); 
-B_c_vv(k)=B_c_v(round(86.4*md*k)); 
-X_vv(k)=X_v(round(86.4*md*k)); 
-N_vv(k)=N_v(round(86.4*md*k)); 
-C_vv(k)=C_v(round(86.4*md*k)); 
-ON_vv(k)=ON_v(round(86.4*md*k)); 
-OC_vv(k)=OC_v(round(86.4*md*k));
-mu_vv(k)=mu_v(round(86.4*md*k));
-q_n_vv(k)=q_n_v(round(86.4*md*k));
-q_c_vv(k)=q_c_v(round(86.4*md*k));
+B_n_vv(k)=B_n_v(round(ts*86.4*md*k)); 
+B_c_vv(k)=B_c_v(round(ts*86.4*md*k)); 
+X_vv(k)=X_v(round(ts*86.4*md*k)); 
+N_vv(k)=N_v(round(ts*86.4*md*k)); 
+C_vv(k)=C_v(round(ts*86.4*md*k)); 
+ON_vv(k)=ON_v(round(ts*86.4*md*k)); 
+OC_vv(k)=OC_v(round(ts*86.4*md*k));
+mu_vv(k)=mu_v(round(ts*86.4*md*k));
+q_n_vv(k)=q_n_v(round(ts*86.4*md*k));
+q_c_vv(k)=q_c_v(round(ts*86.4*md*k));
 end
 
 % end 
@@ -288,25 +291,25 @@ plot(time,N_vv)
 hold on
 errorbar(Nx,Ny,N_SD,'o','MarkerFaceColor','r')
 title(titles{2})
-ylabel('N (\mumol L^{-1})')
+ylabel('N (\mumol cell^{-1})')
 
 subplot(2,3,3)
 plot(time,C_vv)
 hold on
 errorbar(Cx,Cy,C_SD,'o','MarkerFaceColor','r')
 title(titles{3})
-ylabel('C (\mumol L^{-1})')
+ylabel('C (\mumol cell^{-1})')
 
 subplot(2,3,4)
 plot(time,q_n_vv)
 title(titles{4})
-ylabel('Q^N (\mumol cell^{-1})')
+ylabel('Q^N (\mumol L^{-1})')
 xlabel('Time (days)')
 
 subplot(2,3,5)
 plot(time,q_c_vv)
 title(titles{5})
-ylabel('Q^C (\mumol cell^{-1})')
+ylabel('Q^C (\mumol L^{-1})')
 xlabel('Time (days)')
 
 subplot(2,3,6)
@@ -315,3 +318,5 @@ title(titles{6})
 ylabel('C:N ratio')
 xlabel('Time (days)')
 
+results = [time; X_vv; N_vv; C_vv; ON_vv; OC_vv; B_n_vv; B_c_vv; q_n_vv; q_c_vv; q_c_vv./q_n_vv]; 
+save TimeSteps_highVma results -append -ascii 
