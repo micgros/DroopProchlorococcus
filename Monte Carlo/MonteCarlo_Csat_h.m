@@ -1,9 +1,12 @@
 %% Monte-Carlo ruffle
+% Grossowicz et al. 2016
 % created by MG, micgros@gmail.com
 % last midification : 15 Feb 16
 
 clear;
 clc
+
+rng('shuffle');
 
 % parameter vals:
 mu_inf = 1e-5;
@@ -28,12 +31,12 @@ paramRange=[0, 1;
                      r0*.1,             r0*10;
                      Kg*0.0001,         Kg*10];
 
-for k=1:1000
+for u=1:1000
 
-p=randi([2,5]);                       % Select how many parameters you want to change
+p=randi([2,5]);                      % Select how many parameters you want to change
 
 rows=zeros(1,p);                     % which param were chosen  
-Val=zeros(1,p);                         % random valus of chosen param 
+Val=zeros(1,p);                      % random valus of chosen param 
 
 % for continues algorithm
 row = randperm(11);
@@ -62,7 +65,7 @@ ON0=20;
 OC0=ON0*R_CN; 
 
 forMonteCarlo_LowN_Csat_h
-fprintf('Round #%d\n finished', k);
+fprintf('Round #%d\n finished', u);
 
 end
 

@@ -1,4 +1,5 @@
 %% for Monte-Carlo ruffle
+% Grossowicz et al. 2016
 % created by MG, micgros@gmail.com
 % last midification : 15 Feb 16
 
@@ -150,7 +151,11 @@ for i=1:86400*md
   Csat = csatd * 1.0e6 / rhoref; %umol kg-1
 
     % HCO3- additions (1 mM) on days: 0, 5, 11, 18
-    if i==432000&&950400&&1555200
+    if i==432000 
+        C=C+1000;
+    elseif i==950400
+        C=C+1000;
+    elseif i==1555200
         C=C+1000;
     end
 
@@ -216,9 +221,9 @@ q_c_vv(k)=q_c_v(round(86.4*md*k));
 end
 
 
-% save multiplotMonteCarlo_9312_LowN_Csat_h2 X_vv -append -ascii
-% save N_9312_LowN_Csat_h2 N_vv -append -ascii
-% save C_9312_LowN_Csat_h2 C_vv -append -ascii
-% save QN_9312_LowN_Csat_h2 q_n_vv -append -ascii
-% save QC_LowN_Csat_h2 q_c_vv -append -ascii
+save multiplotMonteCarlo_9312_LowN_Csat_h2 X_vv -append -ascii
+save N_9312_LowN_Csat_h2 N_vv -append -ascii
+save C_9312_LowN_Csat_h2 C_vv -append -ascii
+save QN_9312_LowN_Csat_h2 q_n_vv -append -ascii
+save QC_LowN_Csat_h2 q_c_vv -append -ascii
 
