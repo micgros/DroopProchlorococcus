@@ -1,7 +1,7 @@
 %% Sensetivity analysis (Fig. 4)
 % Grossowicz et al. 2016
 % created by MG, micgros@gmail.com
-% last midification : 25 Jul 2016
+% last modification : 25 Jul 2016
 
 md=100;
 R_CN=106/16;

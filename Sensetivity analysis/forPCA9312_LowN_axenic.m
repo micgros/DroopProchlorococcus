@@ -1,7 +1,7 @@
 %% For sensetivity analysis (Fig. 4), the model
 % Grossowicz et al. 2016
 % created by MG, micgros@gmail.com
-% last midification : 25 Jul 2016
+% last modification : 25 Jul 2016
 
 
 % biomass (umol N l-1 )

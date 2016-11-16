@@ -1,7 +1,7 @@
 %% for Monte-Carlo ruffle
 % Grossowicz et al. 2016
 % created by MG, micgros@gmail.com
-% last midification : 15 Feb 16
+% last modification : 15 Feb 16
 
 clc
 
