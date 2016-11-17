@@ -20,16 +20,16 @@ q_C_max = 6.5295e-9;
 r0 = .18/86400;
 Kg = 0.4968/86400;
 paramRange=[0, 1;
-                     mu_inf*.1,      mu_inf*5;
-                     m*.5,                m*5;
-                     V_N*.1,           V_N*10;
-                     V_C*.1,           V_C*10;
-                     q_N_min*.25,   q_N_min*2;
-                     q_C_min*.025,  q_C_min*2;
-                     q_N_max*.5,    q_N_max*2;
-                     q_C_max*.5,    q_C_max*2;
-                     r0*.1,             r0*10;
-                     Kg*0.0001,         Kg*10];
+            mu_inf*.1,      mu_inf*5;
+            m*.5,                m*5;
+            V_N*.1,           V_N*10;
+            V_C*.1,           V_C*10;
+            q_N_min*.25,   q_N_min*2;
+            q_C_min*.025,  q_C_min*2;
+            q_N_max*.5,    q_N_max*2;
+            q_C_max*.5,    q_C_max*2;
+            r0*.1,             r0*10;
+            Kg*0.0001,         Kg*10];
 
 for u=1:1000
 

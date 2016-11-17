@@ -1,4 +1,4 @@
-%% Sensetivity analysis (Fig. 4)
+%% Sensitivity analysis (Fig. 4)
 % Grossowicz et al. 2016
 % created by MG, micgros@gmail.com
 % last modification : 25 Jul 2016
